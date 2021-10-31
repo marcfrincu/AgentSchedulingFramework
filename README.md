@@ -7,6 +7,13 @@ The Agent Scheduling Framework (ASF) provides a decentralized method for schedul
 
 It relies on my own **OSyRIS workflow engine** based on a nature inspired paradigm (chemical reactions was the kickstarter) to execute the scheduling algorithms and **RabbitMQ** for handling messages between components. Unfortunately, I cannot find the source code for OSyRIS but I have included the compiled jar file (lib/ folder) together with some example files used by ASF during the scheduling and negotiation (rules/ folder).
 
+### Published papers
+
+The platform has been presented in various conferences. See below for a selected list:
+
+- M. Frincu, N. Villegas, D. Petcu, H. Muller, R. Ruvoy, [Self-Healing Distributed Scheduling Platform](https://hal.inria.fr/inria-00563670), Procs. IEEE/ACM CCGrid, 2011.
+- M. Frincu, D. Petcu, [OSyRIS: a Nature Inspired Workflow Engine for Service Oriented Environments](https://www.scpe.org/index.php/scpe/article/view/642), Scalable Computing Practice and Experience, vol. 11(1), 2010.
+
 ## Disclaimer
 
 The project was a proof of concept demonstrating self-healing in an agent-based distributed platform and should be treated accordingly. It combines various technologies and concepts I found interesting during my PhD studies and worth further exploring.
