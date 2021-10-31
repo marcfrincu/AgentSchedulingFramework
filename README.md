@@ -11,6 +11,8 @@ It relies on my own **OSyRIS workflow engine** based on a nature inspired paradi
 
 The project was a proof of concept demonstrating self-healing in an agent-based distributed platform and should be treated accordingly. It combines various technologies and concepts I found interesting during my PhD studies and worth further exploring.
 
+The file *asf-todo* contains some of my plans for further improving the prototype and which I never got the time to do.
+
 ### Class Structure
 
 The class structure is as follows:
