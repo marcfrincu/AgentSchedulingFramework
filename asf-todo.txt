@@ -1,0 +1,34 @@
+RabbitMQ	http://localhost:15672
+PGAdmin		http://localhost/phppgadmin/	
+Hadoop		http://localhost:50060
+
+Features: 
+self-healing based on message queues
+	modules need to register to the right queues
+negotiator module based on queues with predefined steps
+scheduling module template ready to be linked to the healer. Only the scheduling is required
+database storage
+hadoop access to store files and images
+
+++++++++++++++++++
+deploy.json - DONE
+modify DB to save module states and agent certificate
+	text info
+add binary files to hadoop
+modify healing to save itself and handle other healers and custom modules
+test deployment using deploy.json
+implement logic to handle auth, submissions and retrievals between clouds
+	store image on Hadoop
+	connect to remote executor
+	load image on remote cloud
+	send submission files
+		submit them to the remote schlouder
+	get the results from schlouder
+add to schlouder server AMQP interface to ASF
+	ping healer
+	send inquiries to negotiator
+		request for execution task
+		request for virtual machine
+	send inquiries to the scheduler
+		scheduler stops vm after expiration time unless extension is received
+	once VM is set send IP to client so that it can submit files on its own

@@ -1,0 +1,727 @@
+package osyris.workflow0
+
+# This file was automatically generated using the SILK2Drools class
+# part of the OSyRIS Workflow Engine developed at
+# the West University of Timisoara, Faculty of Mathematics and Computer Science Romania
+# For questions and/or remarks mail to: mfrincu@info.uvt.ro
+
+import osyris.workflow.State;
+import osyris.workflow.WFResource;
+import org.apache.log4j.Logger;
+import osyris.workflow.Runner;
+
+global org.apache.log4j.Logger log;
+global java.util.ArrayList runner;
+
+rule "0"
+	no-loop false
+	when
+		$state2 : State ( index == 2 )
+		eval ( $state2.getNoInstances() > 0 )
+		$state0 : State ( index == 0 )
+		eval ( $state0.getNoInstances() > 0 )
+		$state1 : State ( index == 1 )
+	then
+		log.debug("Firing rule: "+0);
+		((Runner)runner.get(0)).clearAllStates();
+		modify( $state0 )  { decrementNoInstances() };
+		$state1.setInput("i1", $state0.getOutput("o1"), 0 );
+		$state1.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(0)).addState( $state1 );
+		((Runner)runner.get(0)).executeAll();
+		log.debug("Sent tasks for execution");
+		kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "1" ).setFocus();
+end
+
+rule "1"
+	no-loop false
+	agenda-group "1"
+	when
+		$state1 : State ( index == 1 )
+		eval ( $state1.getNoInstances() > 0 )
+		eval ( $state1.getOutput("o1").toString().compareTo("-1") != 0  )
+		$state2 : State ( index == 2 )
+		eval ( $state2.getNoInstances() > 0 )
+		$state3 : State ( index == 3 )
+		$state4 : State ( index == 4 )
+	then
+		log.debug("Firing rule: "+1);
+		((Runner)runner.get(1)).clearAllStates();
+		modify( $state2 )  { decrementNoInstances() };
+		$state3.setInput("i1", $state1.getOutput("o1"), 1 );
+		$state3.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(1)).addState( $state3 );
+		$state4.setInput("i1", $state1.getOutput("o1"), 1 );
+		$state4.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(1)).addState( $state4 );
+		((Runner)runner.get(1)).executeAll();
+		log.debug("Sent tasks for execution");
+end
+
+rule "2"
+	no-loop false
+	agenda-group "1"
+	when
+		$state3 : State ( index == 3 )
+		eval ( $state3.getNoInstances() > 0 )
+		eval ( $state3.getOutput("o1").toString().compareTo("-1") != 0  )
+		$state5 : State ( index == 5 )
+	then
+		log.debug("Firing rule: "+2);
+		((Runner)runner.get(2)).clearAllStates();
+		modify( $state3 )  { decrementNoInstances() };
+		$state5.setInput("i1", $state3.getOutput("o1"), 3 );
+		$state5.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(2)).addState( $state5 );
+		((Runner)runner.get(2)).executeAll();
+		log.debug("Sent tasks for execution");
+end
+
+rule "3"
+	no-loop false
+	agenda-group "1"
+	when
+		$state3 : State ( index == 3 )
+		eval ( $state3.getNoInstances() > 0 )
+		eval ( $state3.getOutput("o1").toString().compareTo("-1") == 0  )
+		$state12 : State ( index == 12 )
+	then
+		log.debug("Firing rule: "+3);
+		((Runner)runner.get(3)).clearAllStates();
+		modify( $state3 )  { decrementNoInstances() };
+		$state12.setInput("i1", $state3.getOutput("o1"), 3 );
+		$state12.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(3)).addState( $state12 );
+		((Runner)runner.get(3)).executeAll();
+		log.debug("Sent tasks for execution");
+		kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "5" ).setFocus();
+end
+
+rule "4"
+	no-loop false
+	agenda-group "1"
+	when
+		$state4 : State ( index == 4 )
+		eval ( $state4.getNoInstances() > 0 )
+		eval ( $state4.getOutput("o1").toString().compareTo("-1") != 0  )
+		$state6 : State ( index == 6 )
+	then
+		log.debug("Firing rule: "+4);
+		((Runner)runner.get(4)).clearAllStates();
+		modify( $state4 )  { decrementNoInstances() };
+		$state6.setInput("i1", $state4.getOutput("o1"), 4 );
+		$state6.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(4)).addState( $state6 );
+		((Runner)runner.get(4)).executeAll();
+		log.debug("Sent tasks for execution");
+end
+
+rule "5"
+	no-loop false
+	agenda-group "1"
+	when
+		$state4 : State ( index == 4 )
+		eval ( $state4.getNoInstances() > 0 )
+		eval ( $state4.getOutput("o1").toString().compareTo("-1") == 0  )
+		$state12 : State ( index == 12 )
+	then
+		log.debug("Firing rule: "+5);
+		((Runner)runner.get(5)).clearAllStates();
+		modify( $state4 )  { decrementNoInstances() };
+		$state12.setInput("i1", $state4.getOutput("o1"), 4 );
+		$state12.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(5)).addState( $state12 );
+		((Runner)runner.get(5)).executeAll();
+		log.debug("Sent tasks for execution");
+		kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "5" ).setFocus();
+end
+
+rule "6"
+	no-loop false
+	agenda-group "1"
+	when
+		$state5 : State ( index == 5 )
+		eval ( $state5.getNoInstances() > 0 )
+		$state6 : State ( index == 6 )
+		eval ( $state6.getNoInstances() > 0 )
+		eval ( $state5.getOutput("o1").toString().compareTo("-1") != 0  )
+and		eval ( $state6.getOutput("o1").toString().compareTo("-1") != 0  )
+		$state13 : State ( index == 13 )
+	then
+		log.debug("Firing rule: "+6);
+		((Runner)runner.get(6)).clearAllStates();
+		modify( $state5 )  { decrementNoInstances() };
+		modify( $state6 )  { decrementNoInstances() };
+		$state13.setInput("i1", $state5.getOutput("o1"), 5 );
+		$state13.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(6)).addState( $state13 );
+		$state5.setInput("i1", $state5.getOutput("o1"), 5 );
+		$state5.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(6)).addState( $state5 );
+		$state6.setInput("i1", $state6.getOutput("o1"), 6 );
+		$state6.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(6)).addState( $state6 );
+		((Runner)runner.get(6)).executeAll();
+		log.debug("Sent tasks for execution");
+		kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "9" ).setFocus();
+end
+
+rule "7"
+	no-loop false
+	agenda-group "6"
+	when
+		$state7 : State ( index == 7 )
+		eval ( $state7.getNoInstances() > 0 )
+		eval ( $state7.getOutput("o2").toString().compareTo("false") == 0  )
+and		eval ( $state7.getOutput("o1").toString().compareTo("-1") != 0  )
+		$state5 : State ( index == 5 )
+	then
+		log.debug("Firing rule: "+7);
+		((Runner)runner.get(7)).clearAllStates();
+		modify( $state7 )  { decrementNoInstances() };
+		$state5.setInput("i1", $state7.getOutput("o1"), 7 );
+		$state5.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(7)).addState( $state5 );
+		((Runner)runner.get(7)).executeAll();
+		log.debug("Sent tasks for execution");
+end
+
+rule "8"
+	no-loop false
+	agenda-group "6"
+	when
+		$state7 : State ( index == 7 )
+		eval ( $state7.getNoInstances() > 0 )
+		eval ( $state7.getOutput("o1").toString().compareTo("-1") != 0  )
+		$state1 : State ( index == 1 )
+		eval ( $state1.getNoInstances() > 0 )
+		$state22 : State ( index == 22 )
+	then
+		log.debug("Firing rule: "+8);
+		((Runner)runner.get(8)).clearAllStates();
+		modify( $state7 )  { decrementNoInstances() };
+		$state22.setInput("i1", $state1.getOutput("o1"), 1 );
+		$state22.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(8)).addState( $state22 );
+		((Runner)runner.get(8)).executeAll();
+		log.debug("Sent tasks for execution");
+end
+
+rule "9"
+	no-loop false
+	agenda-group "6"
+	when
+		$state22 : State ( index == 22 )
+		eval ( $state22.getNoInstances() > 0 )
+		eval ( $state22.getOutput("o1").toString().compareTo("-1") != 0  )
+		$state1 : State ( index == 1 )
+		eval ( $state1.getNoInstances() > 0 )
+		$state17 : State ( index == 17 )
+		$state15 : State ( index == 15 )
+		$state23 : State ( index == 23 )
+	then
+		log.debug("Firing rule: "+9);
+		((Runner)runner.get(9)).clearAllStates();
+		modify( $state22 )  { decrementNoInstances() };
+		$state17.setInput("i1", $state22.getOutput("o1"), 22 );
+		$state17.setNoInstancesToBeCreated( 1 );
+		$state17.setInput("i2", $state22.getOutput("o2"), 22 );
+		$state17.setNoInstancesToBeCreated( 1 );
+		$state17.setInput("i3", $state22.getOutput("o3"), 22 );
+		$state17.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(9)).addState( $state17 );
+		$state15.setInput("i1", $state22.getOutput("o1"), 22 );
+		$state15.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(9)).addState( $state15 );
+		$state23.setInput("i1", $state1.getOutput("o1"), 1 );
+		$state23.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(9)).addState( $state23 );
+		((Runner)runner.get(9)).executeAll();
+		log.debug("Sent tasks for execution");
+end
+
+rule "10"
+	no-loop false
+	agenda-group "6"
+	when
+		$state23 : State ( index == 23 )
+		eval ( $state23.getNoInstances() > 0 )
+		eval ( $state23.getOutput("o1").toString().compareTo("0") != 0  )
+		$state1 : State ( index == 1 )
+		eval ( $state1.getNoInstances() > 0 )
+		$state3 : State ( index == 3 )
+		$state4 : State ( index == 4 )
+	then
+		log.debug("Firing rule: "+10);
+		((Runner)runner.get(10)).clearAllStates();
+		modify( $state23 )  { decrementNoInstances() };
+		$state3.setInput("i1", $state1.getOutput("o1"), 1 );
+		$state3.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(10)).addState( $state3 );
+		$state4.setInput("i1", $state1.getOutput("o1"), 1 );
+		$state4.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(10)).addState( $state4 );
+		((Runner)runner.get(10)).executeAll();
+		log.debug("Sent tasks for execution");
+		kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "1" ).setFocus();
+end
+
+rule "11"
+	no-loop false
+	agenda-group "6"
+	when
+		$state23 : State ( index == 23 )
+		eval ( $state23.getNoInstances() > 0 )
+		eval ( $state23.getOutput("o1").toString().compareTo("0") == 0  )
+		$state12 : State ( index == 12 )
+	then
+		log.debug("Firing rule: "+11);
+		((Runner)runner.get(11)).clearAllStates();
+		modify( $state23 )  { decrementNoInstances() };
+		$state12.setInput("i1", $state23.getOutput("o1"), 23 );
+		$state12.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(11)).addState( $state12 );
+		((Runner)runner.get(11)).executeAll();
+		log.debug("Sent tasks for execution");
+		kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "5" ).setFocus();
+end
+
+rule "12"
+	no-loop false
+	agenda-group "6"
+	when
+		$state22 : State ( index == 22 )
+		eval ( $state22.getNoInstances() > 0 )
+		eval ( $state22.getOutput("o1").toString().compareTo("-1") == 0  )
+		$state12 : State ( index == 12 )
+	then
+		log.debug("Firing rule: "+12);
+		((Runner)runner.get(12)).clearAllStates();
+		modify( $state22 )  { decrementNoInstances() };
+		$state12.setInput("i1", $state22.getOutput("o1"), 22 );
+		$state12.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(12)).addState( $state12 );
+		((Runner)runner.get(12)).executeAll();
+		log.debug("Sent tasks for execution");
+		kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "5" ).setFocus();
+end
+
+rule "13"
+	no-loop false
+	agenda-group "6"
+	when
+		$state7 : State ( index == 7 )
+		eval ( $state7.getNoInstances() > 0 )
+		eval ( $state7.getOutput("o2").toString().compareTo("true") == 0  )
+and		eval ( $state7.getOutput("o1").toString().compareTo("-1") == 0  )
+		$state12 : State ( index == 12 )
+	then
+		log.debug("Firing rule: "+13);
+		((Runner)runner.get(13)).clearAllStates();
+		modify( $state7 )  { decrementNoInstances() };
+		$state12.setInput("i1", $state7.getOutput("o1"), 7 );
+		$state12.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(13)).addState( $state12 );
+		((Runner)runner.get(13)).executeAll();
+		log.debug("Sent tasks for execution");
+		kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "5" ).setFocus();
+end
+
+rule "14"
+	no-loop false
+	agenda-group "9"
+	when
+		$state5 : State ( index == 5 )
+		eval ( $state5.getNoInstances() > 0 )
+		$state11 : State ( index == 11 )
+	then
+		log.debug("Firing rule: "+14);
+		((Runner)runner.get(14)).clearAllStates();
+		modify( $state5 )  { decrementNoInstances() };
+		$state11.setInput("i1", $state5.getOutput("o1"), 5 );
+		$state11.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(14)).addState( $state11 );
+		((Runner)runner.get(14)).executeAll();
+		log.debug("Sent tasks for execution");
+		kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "4" ).setFocus();
+end
+
+rule "15"
+	no-loop false
+	agenda-group "2"
+	when
+		$state9 : State ( index == 9 )
+		eval ( $state9.getNoInstances() > 0 )
+		$state10 : State ( index == 10 )
+	then
+		log.debug("Firing rule: "+15);
+		((Runner)runner.get(15)).clearAllStates();
+		modify( $state9 )  { decrementNoInstances() };
+		$state10.setInput("i1", $state9.getOutput("o1"), 9 );
+		$state10.setNoInstancesToBeCreated( 1 );
+		$state10.setInput("i2", $state9.getOutput("o2"), 9 );
+		$state10.setNoInstancesToBeCreated( 1 );
+		$state10.setInput("i5", $state9.getOutput("o4"), 9 );
+		$state10.setNoInstancesToBeCreated( 1 );
+		$state10.setInput("i3", $state9.getOutput("o3"), 9 );
+		$state10.setNoInstancesToBeCreated( 1 );
+		$state10.setInput("i4", $state9.getOutput("o5"), 9 );
+		$state10.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(15)).addState( $state10 );
+		((Runner)runner.get(15)).executeAll();
+		log.debug("Sent tasks for execution");
+end
+
+rule "16"
+	no-loop false
+	agenda-group "2"
+	when
+		$state8 : State ( index == 8 )
+		eval ( $state8.getNoInstances() > 0 )
+		eval ( $state8.getOutput("o2").toString().compareTo("false") == 0  )
+and		eval ( $state8.getOutput("o1").toString().compareTo("-1") != 0  )
+		$state10 : State ( index == 10 )
+		eval ( $state10.getNoInstances() > 0 )
+		$state6 : State ( index == 6 )
+		$state5 : State ( index == 5 )
+	then
+		log.debug("Firing rule: "+16);
+		((Runner)runner.get(16)).clearAllStates();
+		modify( $state8 )  { decrementNoInstances() };
+		modify( $state10 )  { decrementNoInstances() };
+		$state6.setInput("i1", $state8.getOutput("o1"), 8 );
+		$state6.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(16)).addState( $state6 );
+		$state5.setInput("i1", $state10.getOutput("o1"), 10 );
+		$state5.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(16)).addState( $state5 );
+		((Runner)runner.get(16)).executeAll();
+		log.debug("Sent tasks for execution");
+		kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "9" ).setFocus();
+end
+
+rule "17"
+	no-loop false
+	agenda-group "2"
+	when
+		$state8 : State ( index == 8 )
+		eval ( $state8.getNoInstances() > 0 )
+		$state1 : State ( index == 1 )
+		eval ( $state1.getNoInstances() > 0 )
+		eval ( $state8.getOutput("o2").toString().compareTo("true") == 0  )
+and		eval ( $state8.getOutput("o1").toString().compareTo("-1") != 0  )
+and		eval ( $state1.getOutput("o1").toString().compareTo("-1") != 0  )
+		$state10 : State ( index == 10 )
+		eval ( $state10.getNoInstances() > 0 )
+		$state21 : State ( index == 21 )
+		$state7 : State ( index == 7 )
+		$state6 : State ( index == 6 )
+	then
+		log.debug("Firing rule: "+17);
+		((Runner)runner.get(17)).clearAllStates();
+		modify( $state8 )  { decrementNoInstances() };
+		modify( $state10 )  { decrementNoInstances() };
+		$state21.setInput("i1", $state10.getOutput("o1"), 10 );
+		$state21.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(17)).addState( $state21 );
+		$state7.setInput("i2", $state1.getOutput("o1"), 1 );
+		$state7.setNoInstancesToBeCreated( 1 );
+		$state7.setInput("i1", $state10.getOutput("o1"), 10 );
+		$state7.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(17)).addState( $state7 );
+		$state6.setInput("i1", $state8.getOutput("o1"), 8 );
+		$state6.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(17)).addState( $state6 );
+		((Runner)runner.get(17)).executeAll();
+		log.debug("Sent tasks for execution");
+		kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "6" ).setFocus();
+end
+
+rule "18"
+	no-loop false
+	agenda-group "3"
+	when
+		$state9 : State ( index == 9 )
+		eval ( $state9.getNoInstances() > 0 )
+		$state10 : State ( index == 10 )
+	then
+		log.debug("Firing rule: "+18);
+		((Runner)runner.get(18)).clearAllStates();
+		modify( $state9 )  { decrementNoInstances() };
+		$state10.setInput("i1", $state9.getOutput("o1"), 9 );
+		$state10.setNoInstancesToBeCreated( 1 );
+		$state10.setInput("i2", $state9.getOutput("o2"), 9 );
+		$state10.setNoInstancesToBeCreated( 1 );
+		$state10.setInput("i5", $state9.getOutput("o4"), 9 );
+		$state10.setNoInstancesToBeCreated( 1 );
+		$state10.setInput("i3", $state9.getOutput("o3"), 9 );
+		$state10.setNoInstancesToBeCreated( 1 );
+		$state10.setInput("i4", $state9.getOutput("o5"), 9 );
+		$state10.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(18)).addState( $state10 );
+		((Runner)runner.get(18)).executeAll();
+		log.debug("Sent tasks for execution");
+end
+
+rule "19"
+	no-loop false
+	agenda-group "3"
+	when
+		$state8 : State ( index == 8 )
+		eval ( $state8.getNoInstances() > 0 )
+		eval ( $state8.getOutput("o2").toString().compareTo("false") == 0  )
+and		eval ( $state8.getOutput("o1").toString().compareTo("-1") != 0  )
+		$state10 : State ( index == 10 )
+		eval ( $state10.getNoInstances() > 0 )
+		$state6 : State ( index == 6 )
+		$state5 : State ( index == 5 )
+	then
+		log.debug("Firing rule: "+19);
+		((Runner)runner.get(19)).clearAllStates();
+		modify( $state8 )  { decrementNoInstances() };
+		modify( $state10 )  { decrementNoInstances() };
+		$state6.setInput("i1", $state8.getOutput("o1"), 8 );
+		$state6.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(19)).addState( $state6 );
+		$state5.setInput("i1", $state10.getOutput("o1"), 10 );
+		$state5.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(19)).addState( $state5 );
+		((Runner)runner.get(19)).executeAll();
+		log.debug("Sent tasks for execution");
+		kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "9" ).setFocus();
+end
+
+rule "20"
+	no-loop false
+	agenda-group "3"
+	when
+		$state8 : State ( index == 8 )
+		eval ( $state8.getNoInstances() > 0 )
+		$state1 : State ( index == 1 )
+		eval ( $state1.getNoInstances() > 0 )
+		eval ( $state8.getOutput("o2").toString().compareTo("true") == 0  )
+and		eval ( $state8.getOutput("o1").toString().compareTo("-1") != 0  )
+and		eval ( $state1.getOutput("o1").toString().compareTo("-1") != 0  )
+		$state10 : State ( index == 10 )
+		eval ( $state10.getNoInstances() > 0 )
+		$state7 : State ( index == 7 )
+		$state6 : State ( index == 6 )
+	then
+		log.debug("Firing rule: "+20);
+		((Runner)runner.get(20)).clearAllStates();
+		modify( $state8 )  { decrementNoInstances() };
+		modify( $state10 )  { decrementNoInstances() };
+		$state7.setInput("i2", $state1.getOutput("o1"), 1 );
+		$state7.setNoInstancesToBeCreated( 1 );
+		$state7.setInput("i1", $state10.getOutput("o1"), 10 );
+		$state7.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(20)).addState( $state7 );
+		$state6.setInput("i1", $state8.getOutput("o1"), 8 );
+		$state6.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(20)).addState( $state6 );
+		((Runner)runner.get(20)).executeAll();
+		log.debug("Sent tasks for execution");
+		kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "6" ).setFocus();
+end
+
+rule "21"
+	no-loop false
+	agenda-group "4"
+	when
+		$state6 : State ( index == 6 )
+		eval ( $state6.getNoInstances() > 0 )
+		$state18 : State ( index == 18 )
+	then
+		log.debug("Firing rule: "+21);
+		((Runner)runner.get(21)).clearAllStates();
+		modify( $state6 )  { decrementNoInstances() };
+		$state18.setInput("i1", $state6.getOutput("o1"), 6 );
+		$state18.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(21)).addState( $state18 );
+		((Runner)runner.get(21)).executeAll();
+		log.debug("Sent tasks for execution");
+end
+
+rule "22"
+	no-loop false
+	agenda-group "4"
+	when
+		$state11 : State ( index == 11 )
+		eval ( $state11.getNoInstances() > 0 )
+		eval ( $state11.getOutput("o2").toString().compareTo("true") == 0  )
+and		eval ( $state11.getOutput("o9").toString().compareTo("false") == 0  )
+		$state18 : State ( index == 18 )
+		eval ( $state18.getNoInstances() > 0 )
+		$state1 : State ( index == 1 )
+		eval ( $state1.getNoInstances() > 0 )
+		$state20 : State ( index == 20 )
+	then
+		log.debug("Firing rule: "+22);
+		((Runner)runner.get(22)).clearAllStates();
+		modify( $state11 )  { decrementNoInstances() };
+		modify( $state18 )  { decrementNoInstances() };
+		$state20.setInput("i2", $state1.getOutput("o1"), 1 );
+		$state20.setNoInstancesToBeCreated( 1 );
+		$state20.setInput("i1", $state11.getOutput("o1"), 11 );
+		$state20.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(22)).addState( $state20 );
+		((Runner)runner.get(22)).executeAll();
+		log.debug("Sent tasks for execution");
+		kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "7" ).setFocus();
+end
+
+rule "23"
+	no-loop false
+	agenda-group "4"
+	when
+		$state11 : State ( index == 11 )
+		eval ( $state11.getNoInstances() > 0 )
+		eval ( $state11.getOutput("o9").toString().compareTo("true") == 0  )
+and		eval ( $state11.getOutput("o1").toString().compareTo("-1") != 0  )
+		$state18 : State ( index == 18 )
+		eval ( $state18.getNoInstances() > 0 )
+		$state9 : State ( index == 9 )
+		$state8 : State ( index == 8 )
+	then
+		log.debug("Firing rule: "+23);
+		((Runner)runner.get(23)).clearAllStates();
+		modify( $state11 )  { decrementNoInstances() };
+		modify( $state18 )  { decrementNoInstances() };
+		$state9.setInput("i1", $state11.getOutput("o1"), 11 );
+		$state9.setNoInstancesToBeCreated( 1 );
+		$state9.setInput("i4", $state18.getOutput("o2"), 18 );
+		$state9.setNoInstancesToBeCreated( 1 );
+		$state9.setInput("i2", $state11.getOutput("o4"), 11 );
+		$state9.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(23)).addState( $state9 );
+		$state8.setInput("i1", $state18.getOutput("o2"), 18 );
+		$state8.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(23)).addState( $state8 );
+		((Runner)runner.get(23)).executeAll();
+		log.debug("Sent tasks for execution");
+		kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "2" ).setFocus();
+end
+
+rule "24"
+	no-loop false
+	agenda-group "4"
+	when
+		$state11 : State ( index == 11 )
+		eval ( $state11.getNoInstances() > 0 )
+		eval ( $state11.getOutput("o2").toString().compareTo("false") == 0  )
+and		eval ( $state11.getOutput("o9").toString().compareTo("false") == 0  )
+and		eval ( $state11.getOutput("o1").toString().compareTo("-1") != 0  )
+		$state18 : State ( index == 18 )
+		eval ( $state18.getNoInstances() > 0 )
+		$state9 : State ( index == 9 )
+		$state8 : State ( index == 8 )
+	then
+		log.debug("Firing rule: "+24);
+		((Runner)runner.get(24)).clearAllStates();
+		modify( $state11 )  { decrementNoInstances() };
+		modify( $state18 )  { decrementNoInstances() };
+		$state9.setInput("i1", $state11.getOutput("o1"), 11 );
+		$state9.setNoInstancesToBeCreated( 1 );
+		$state9.setInput("i4", $state18.getOutput("o2"), 18 );
+		$state9.setNoInstancesToBeCreated( 1 );
+		$state9.setInput("i2", $state11.getOutput("o4"), 11 );
+		$state9.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(24)).addState( $state9 );
+		$state8.setInput("i1", $state18.getOutput("o2"), 18 );
+		$state8.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(24)).addState( $state8 );
+		((Runner)runner.get(24)).executeAll();
+		log.debug("Sent tasks for execution");
+		kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "3" ).setFocus();
+end
+
+rule "25"
+	no-loop false
+	agenda-group "4"
+	when
+		$state11 : State ( index == 11 )
+		eval ( $state11.getNoInstances() > 0 )
+		eval ( $state11.getOutput("o1").toString().compareTo("-1") == 0  )
+		$state18 : State ( index == 18 )
+		eval ( $state18.getNoInstances() > 0 )
+		$state2 : State ( index == 2 )
+	then
+		log.debug("Firing rule: "+25);
+		((Runner)runner.get(25)).clearAllStates();
+		modify( $state11 )  { decrementNoInstances() };
+		modify( $state18 )  { decrementNoInstances() };
+		$state2.setInput("i1", $state11.getOutput("o1"), 11 );
+		$state2.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(25)).addState( $state2 );
+		((Runner)runner.get(25)).executeAll();
+		log.debug("Sent tasks for execution");
+		kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "1" ).setFocus();
+end
+
+rule "26"
+	no-loop false
+	agenda-group "5"
+	when
+		$state5 : State ( index == 5 )
+		eval ( $state5.getNoInstances() > 0 )
+		$state12 : State ( index == 12 )
+	then
+		log.debug("Firing rule: "+26);
+		((Runner)runner.get(26)).clearAllStates();
+		modify( $state5 )  { decrementNoInstances() };
+		$state12.setInput("i1", $state5.getOutput("o1"), 5 );
+		$state12.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(26)).addState( $state12 );
+		((Runner)runner.get(26)).executeAll();
+		log.debug("Sent tasks for execution");
+end
+
+rule "27"
+	no-loop false
+	agenda-group "5"
+	when
+		$state1 : State ( index == 1 )
+		eval ( $state1.getNoInstances() > 0 )
+		eval ( $state1.getOutput("o1").toString().compareTo("-1") != 0  )
+		$state12 : State ( index == 12 )
+		eval ( $state12.getNoInstances() > 0 )
+		$state3 : State ( index == 3 )
+		$state4 : State ( index == 4 )
+	then
+		log.debug("Firing rule: "+27);
+		((Runner)runner.get(27)).clearAllStates();
+		modify( $state12 )  { decrementNoInstances() };
+		$state3.setInput("i1", $state1.getOutput("o1"), 1 );
+		$state3.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(27)).addState( $state3 );
+		$state4.setInput("i1", $state1.getOutput("o1"), 1 );
+		$state4.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(27)).addState( $state4 );
+		((Runner)runner.get(27)).executeAll();
+		log.debug("Sent tasks for execution");
+		kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "1" ).setFocus();
+end
+
+rule "28"
+	no-loop false
+	agenda-group "7"
+	when
+		$state20 : State ( index == 20 )
+		eval ( $state20.getNoInstances() > 0 )
+		$state1 : State ( index == 1 )
+		eval ( $state1.getNoInstances() > 0 )
+		$state7 : State ( index == 7 )
+	then
+		log.debug("Firing rule: "+28);
+		((Runner)runner.get(28)).clearAllStates();
+		modify( $state20 )  { decrementNoInstances() };
+		$state7.setInput("i2", $state1.getOutput("o1"), 1 );
+		$state7.setNoInstancesToBeCreated( 1 );
+		$state7.setInput("i1", $state20.getOutput("o1"), 20 );
+		$state7.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(28)).addState( $state7 );
+		((Runner)runner.get(28)).executeAll();
+		log.debug("Sent tasks for execution");
+		kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup( "6" ).setFocus();
+end
+

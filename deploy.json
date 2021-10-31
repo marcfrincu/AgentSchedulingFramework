@@ -1,0 +1,14 @@
+{
+	"certificate" : "id_rsa.pub",
+	"modules" : [
+				{					
+					"type" : [ "HEALING", "EXECUTOR" ],
+					"agent_uuid" : "26853a29-0073-4ab8-b3ad-5aacf442d0f5",
+					"paused" : [ "FALSE", "FALSE" ],				
+					"external" : "FALSE",
+					"ip" : "localhost",
+					"archive" : "asf.tar",
+					"start_script" : "executor.sh"
+				}
+			]
+}

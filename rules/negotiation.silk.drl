@@ -1,0 +1,664 @@
+package osyris.workflow
+
+# This file was automatically generated using the SILK2Drools class
+# part of the OSyRIS Workflow Engine developed at
+# the West University of Timisoara, Faculty of Mathematics and Computer Science Romania
+# For questions and/or remarks mail to: mfrincu@info.uvt.ro
+
+import osyris.workflow.State;
+import osyris.workflow.WFResource;
+import org.apache.log4j.Logger;
+import osyris.workflow.Runner;
+
+global org.apache.log4j.Logger log;
+global java.util.ArrayList runner;
+
+rule "0"
+	no-loop false
+	when
+		$state0 : State ( index == 0 )
+		eval ( $state0.getNoInstances() > 0 )
+		$state1 : State ( index == 1 )
+		eval ( $state1.getNoInstances() > 0 )
+		$state2 : State ( index == 2 )
+	then
+		log.debug("Firing rule: "+0);
+		((Runner)runner.get(0)).clearAllStates();
+		modify( $state1 )  { decrementNoInstances() };
+		$state2.setInput("i1", $state0.getOutput("o1"), 0 );
+		$state2.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(0)).addState( $state2 );
+		((Runner)runner.get(0)).executeAll();
+		log.debug("Sent tasks for execution");
+end
+
+rule "1"
+	no-loop false
+	when
+		$state7 : State ( index == 7 )
+		eval ( $state7.getNoInstances() > 0 )
+		$state2 : State ( index == 2 )
+		eval ( $state2.getNoInstances() > 0 )
+		$state6 : State ( index == 6 )
+	then
+		log.debug("Firing rule: "+1);
+		((Runner)runner.get(1)).clearAllStates();
+		modify( $state7 )  { decrementNoInstances() };
+		$state6.setInput("i1", $state7.getOutput("o1"), 7 );
+		$state6.setNoInstancesToBeCreated( 1 );
+		$state6.setInput("i2", $state2.getOutput("o1"), 2 );
+		$state6.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(1)).addState( $state6 );
+		((Runner)runner.get(1)).executeAll();
+		log.debug("Sent tasks for execution");
+end
+
+rule "2"
+	no-loop false
+	when
+		$state0 : State ( index == 0 )
+		eval ( $state0.getNoInstances() > 0 )
+		$state2 : State ( index == 2 )
+		eval ( $state2.getNoInstances() > 0 )
+		$state6 : State ( index == 6 )
+		eval ( $state6.getNoInstances() > 0 )
+		$state3 : State ( index == 3 )
+		$state10 : State ( index == 10 )
+	then
+		log.debug("Firing rule: "+2);
+		((Runner)runner.get(2)).clearAllStates();
+		modify( $state2 )  { decrementNoInstances() };
+		$state3.setInput("i5", $state6.getOutput("o1"), 6 );
+		$state3.setNoInstancesToBeCreated( 1 );
+		$state3.setInput("i4", $state0.getOutput("o7"), 0 );
+		$state3.setNoInstancesToBeCreated( 1 );
+		$state3.setInput("i1", $state0.getOutput("o1"), 0 );
+		$state3.setNoInstancesToBeCreated( 1 );
+		$state3.setInput("i2", $state0.getOutput("o4"), 0 );
+		$state3.setNoInstancesToBeCreated( 1 );
+		$state3.setInput("i3", $state0.getOutput("o5"), 0 );
+		$state3.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(2)).addState( $state3 );
+		$state10.setInput("i1", $state6.getOutput("o1"), 6 );
+		$state10.setNoInstancesToBeCreated( 1 );
+		$state10.setInput("i5", $state2.getOutput("o1"), 2 );
+		$state10.setNoInstancesToBeCreated( 1 );
+		$state10.setInput("i3", $state0.getOutput("o1"), 0 );
+		$state10.setNoInstancesToBeCreated( 1 );
+		$state10.setInput("i4", $state0.getOutput("o5"), 0 );
+		$state10.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(2)).addState( $state10 );
+		((Runner)runner.get(2)).executeAll();
+		log.debug("Sent tasks for execution");
+end
+
+rule "3"
+	no-loop false
+	when
+		$state3 : State ( index == 3 )
+		eval ( $state3.getNoInstances() > 0 )
+		$state4 : State ( index == 4 )
+	then
+		log.debug("Firing rule: "+3);
+		((Runner)runner.get(3)).clearAllStates();
+		modify( $state3 )  { decrementNoInstances() };
+		$state4.setInput("i1", $state3.getOutput("o1"), 3 );
+		$state4.setNoInstancesToBeCreated( 1 );
+		$state4.setInput("i2", $state3.getOutput("o2"), 3 );
+		$state4.setNoInstancesToBeCreated( 1 );
+		$state4.setInput("i3", $state3.getOutput("o3"), 3 );
+		$state4.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(3)).addState( $state4 );
+		((Runner)runner.get(3)).executeAll();
+		log.debug("Sent tasks for execution");
+end
+
+rule "4"
+	no-loop false
+	when
+		$state0 : State ( index == 0 )
+		eval ( $state0.getNoInstances() > 0 )
+		$state4 : State ( index == 4 )
+		eval ( $state4.getNoInstances() > 0 )
+		$state6 : State ( index == 6 )
+		eval ( $state6.getNoInstances() > 0 )
+		$state11 : State ( index == 11 )
+		$state5 : State ( index == 5 )
+	then
+		log.debug("Firing rule: "+4);
+		((Runner)runner.get(4)).clearAllStates();
+		modify( $state4 )  { decrementNoInstances() };
+		$state11.setInput("i2", $state4.getOutput("o1"), 4 );
+		$state11.setNoInstancesToBeCreated( 1 );
+		$state11.setInput("i3", $state0.getOutput("o8"), 0 );
+		$state11.setNoInstancesToBeCreated( 1 );
+		$state11.setInput("i1", $state6.getOutput("o1"), 6 );
+		$state11.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(4)).addState( $state11 );
+		$state5.setInput("i1", $state4.getOutput("o1"), 4 );
+		$state5.setNoInstancesToBeCreated( 1 );
+		$state5.setInput("i2", $state0.getOutput("o1"), 0 );
+		$state5.setNoInstancesToBeCreated( 1 );
+		$state5.setInput("i3", $state4.getOutput("o3"), 4 );
+		$state5.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(4)).addState( $state5 );
+		((Runner)runner.get(4)).executeAll();
+		log.debug("Sent tasks for execution");
+end
+
+rule "5"
+	no-loop false
+	when
+		$state5 : State ( index == 5 )
+		eval ( $state5.getNoInstances() > 0 )
+		eval ( $state5.getOutput("o2").toString().compareTo("false") == 0  )
+		$state4 : State ( index == 4 )
+	then
+		log.debug("Firing rule: "+5);
+		((Runner)runner.get(5)).clearAllStates();
+		modify( $state5 )  { decrementNoInstances() };
+		$state4.setInput("i1", $state5.getOutput("o1"), 5 );
+		$state4.setNoInstancesToBeCreated( 1 );
+		$state4.setInput("i2", $state5.getOutput("o3"), 5 );
+		$state4.setNoInstancesToBeCreated( 1 );
+		$state4.setInput("i3", $state5.getOutput("o4"), 5 );
+		$state4.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(5)).addState( $state4 );
+		((Runner)runner.get(5)).executeAll();
+		log.debug("Sent tasks for execution");
+end
+
+rule "6"
+	no-loop false
+	when
+		$state11 : State ( index == 11 )
+		eval ( $state11.getNoInstances() > 0 )
+		$state6 : State ( index == 6 )
+		eval ( $state6.getNoInstances() > 0 )
+		eval ( $state11.getOutput("o2").toString().compareTo($state6.getOutput("o1").toString()) == 0  )
+		$state12 : State ( index == 12 )
+	then
+		log.debug("Firing rule: "+6);
+		((Runner)runner.get(6)).clearAllStates();
+		modify( $state11 )  { decrementNoInstances() };
+		$state12.setInput("i2", $state11.getOutput("o1"), 11 );
+		$state12.setNoInstancesToBeCreated( 1 );
+		$state12.setInput("i1", $state6.getOutput("o1"), 6 );
+		$state12.setNoInstancesToBeCreated( 1 );
+		$state12.setInput("i3", $state11.getOutput("o3"), 11 );
+		$state12.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(6)).addState( $state12 );
+		((Runner)runner.get(6)).executeAll();
+		log.debug("Sent tasks for execution");
+end
+
+rule "7"
+	no-loop false
+	when
+		$state12 : State ( index == 12 )
+		eval ( $state12.getNoInstances() > 0 )
+		$state6 : State ( index == 6 )
+		eval ( $state6.getNoInstances() > 0 )
+		eval ( $state12.getOutput("o2").toString().compareTo($state6.getOutput("o1").toString()) == 0  )
+		$state13 : State ( index == 13 )
+	then
+		log.debug("Firing rule: "+7);
+		((Runner)runner.get(7)).clearAllStates();
+		modify( $state12 )  { decrementNoInstances() };
+		$state13.setInput("i2", $state12.getOutput("o1"), 12 );
+		$state13.setNoInstancesToBeCreated( 1 );
+		$state13.setInput("i1", $state6.getOutput("o1"), 6 );
+		$state13.setNoInstancesToBeCreated( 1 );
+		$state13.setInput("i3", $state12.getOutput("o3"), 12 );
+		$state13.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(7)).addState( $state13 );
+		((Runner)runner.get(7)).executeAll();
+		log.debug("Sent tasks for execution");
+end
+
+rule "8"
+	no-loop false
+	when
+		$state13 : State ( index == 13 )
+		eval ( $state13.getNoInstances() > 0 )
+		$state6 : State ( index == 6 )
+		eval ( $state6.getNoInstances() > 0 )
+		eval ( $state13.getOutput("o2").toString().compareTo($state6.getOutput("o1").toString()) == 0  )
+		$state14 : State ( index == 14 )
+	then
+		log.debug("Firing rule: "+8);
+		((Runner)runner.get(8)).clearAllStates();
+		modify( $state13 )  { decrementNoInstances() };
+		$state14.setInput("i2", $state13.getOutput("o1"), 13 );
+		$state14.setNoInstancesToBeCreated( 1 );
+		$state14.setInput("i1", $state6.getOutput("o1"), 6 );
+		$state14.setNoInstancesToBeCreated( 1 );
+		$state14.setInput("i3", $state13.getOutput("o3"), 13 );
+		$state14.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(8)).addState( $state14 );
+		((Runner)runner.get(8)).executeAll();
+		log.debug("Sent tasks for execution");
+end
+
+rule "9"
+	no-loop false
+	when
+		$state14 : State ( index == 14 )
+		eval ( $state14.getNoInstances() > 0 )
+		$state6 : State ( index == 6 )
+		eval ( $state6.getNoInstances() > 0 )
+		$state0 : State ( index == 0 )
+		eval ( $state0.getNoInstances() > 0 )
+		eval ( $state14.getOutput("o2").toString().compareTo($state6.getOutput("o1").toString()) == 0  )
+and		eval ( $state14.getOutput("o3").toString().compareTo($state0.getOutput("o8").toString()) == 0  )
+		$state19 : State ( index == 19 )
+	then
+		log.debug("Firing rule: "+9);
+		((Runner)runner.get(9)).clearAllStates();
+		modify( $state0 )  { decrementNoInstances() };
+		$state19.setInput("i4", $state0.getOutput("o6"), 0 );
+		$state19.setNoInstancesToBeCreated( 1 );
+		$state19.setInput("i1", $state0.getOutput("o8"), 0 );
+		$state19.setNoInstancesToBeCreated( 1 );
+		$state19.setInput("i5", $state0.getOutput("o7"), 0 );
+		$state19.setNoInstancesToBeCreated( 1 );
+		$state19.setInput("i2", $state0.getOutput("o4"), 0 );
+		$state19.setNoInstancesToBeCreated( 1 );
+		$state19.setInput("i3", $state0.getOutput("o5"), 0 );
+		$state19.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(9)).addState( $state19 );
+		((Runner)runner.get(9)).executeAll();
+		log.debug("Sent tasks for execution");
+end
+
+rule "10"
+	no-loop false
+	when
+		$state14 : State ( index == 14 )
+		eval ( $state14.getNoInstances() > 0 )
+		$state6 : State ( index == 6 )
+		eval ( $state6.getNoInstances() > 0 )
+		$state19 : State ( index == 19 )
+		eval ( $state19.getNoInstances() > 0 )
+		eval ( $state14.getOutput("o2").toString().compareTo($state6.getOutput("o1").toString()) == 0  )
+and		eval ( $state14.getOutput("o3").toString().compareTo($state19.getOutput("o2").toString()) == 0  )
+		$state15 : State ( index == 15 )
+	then
+		log.debug("Firing rule: "+10);
+		((Runner)runner.get(10)).clearAllStates();
+		modify( $state14 )  { decrementNoInstances() };
+		modify( $state19 )  { decrementNoInstances() };
+		$state15.setInput("i2", $state14.getOutput("o1"), 14 );
+		$state15.setNoInstancesToBeCreated( 1 );
+		$state15.setInput("i1", $state6.getOutput("o1"), 6 );
+		$state15.setNoInstancesToBeCreated( 1 );
+		$state15.setInput("i3", $state19.getOutput("o1"), 19 );
+		$state15.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(10)).addState( $state15 );
+		((Runner)runner.get(10)).executeAll();
+		log.debug("Sent tasks for execution");
+end
+
+rule "11"
+	no-loop false
+	when
+		$state15 : State ( index == 15 )
+		eval ( $state15.getNoInstances() > 0 )
+		$state6 : State ( index == 6 )
+		eval ( $state6.getNoInstances() > 0 )
+		eval ( $state15.getOutput("o2").toString().compareTo($state6.getOutput("o1").toString()) == 0  )
+		$state21 : State ( index == 21 )
+		$state30 : State ( index == 30 )
+		$state29 : State ( index == 29 )
+	then
+		log.debug("Firing rule: "+11);
+		((Runner)runner.get(11)).clearAllStates();
+		modify( $state15 )  { decrementNoInstances() };
+		$state21.setInput("i1", $state6.getOutput("o1"), 6 );
+		$state21.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(11)).addState( $state21 );
+		$state30.setInput("i2", $state6.getOutput("o1"), 6 );
+		$state30.setNoInstancesToBeCreated( 1 );
+		$state30.setInput("i1", $state15.getOutput("o3"), 15 );
+		$state30.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(11)).addState( $state30 );
+		$state29.setInput("i1", $state15.getOutput("o1"), 15 );
+		$state29.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(11)).addState( $state29 );
+		((Runner)runner.get(11)).executeAll();
+		log.debug("Sent tasks for execution");
+end
+
+rule "12"
+	no-loop false
+	when
+		$state21 : State ( index == 21 )
+		eval ( $state21.getNoInstances() > 0 )
+		eval ( $state21.getOutput("o1").toString().compareTo("-1") != 0  )
+		$state22 : State ( index == 22 )
+	then
+		log.debug("Firing rule: "+12);
+		((Runner)runner.get(12)).clearAllStates();
+		modify( $state21 )  { decrementNoInstances() };
+		$state22.setInput("i1", $state21.getOutput("o1"), 21 );
+		$state22.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(12)).addState( $state22 );
+		((Runner)runner.get(12)).executeAll();
+		log.debug("Sent tasks for execution");
+end
+
+rule "13"
+	no-loop false
+	when
+		$state22 : State ( index == 22 )
+		eval ( $state22.getNoInstances() > 0 )
+		$state25 : State ( index == 25 )
+		$state33 : State ( index == 33 )
+	then
+		log.debug("Firing rule: "+13);
+		((Runner)runner.get(13)).clearAllStates();
+		modify( $state22 )  { decrementNoInstances() };
+		$state25.setInput("i1", $state22.getOutput("o1"), 22 );
+		$state25.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(13)).addState( $state25 );
+		$state33.setInput("i1", $state22.getOutput("o1"), 22 );
+		$state33.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(13)).addState( $state33 );
+		((Runner)runner.get(13)).executeAll();
+		log.debug("Sent tasks for execution");
+end
+
+rule "14"
+	no-loop false
+	when
+		$state30 : State ( index == 30 )
+		eval ( $state30.getNoInstances() > 0 )
+		eval ( $state30.getOutput("o1").toString().compareTo("-1") != 0  )
+		$state25 : State ( index == 25 )
+		eval ( $state25.getNoInstances() > 0 )
+		$state33 : State ( index == 33 )
+		eval ( $state33.getNoInstances() > 0 )
+		$state26 : State ( index == 26 )
+	then
+		log.debug("Firing rule: "+14);
+		((Runner)runner.get(14)).clearAllStates();
+		modify( $state33 )  { decrementNoInstances() };
+		$state26.setInput("i2", $state25.getOutput("o1"), 25 );
+		$state26.setNoInstancesToBeCreated( 1 );
+		$state26.setInput("i1", $state30.getOutput("o1"), 30 );
+		$state26.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(14)).addState( $state26 );
+		((Runner)runner.get(14)).executeAll();
+		log.debug("Sent tasks for execution");
+end
+
+rule "15"
+	no-loop false
+	when
+		$state26 : State ( index == 26 )
+		eval ( $state26.getNoInstances() > 0 )
+		eval ( $state26.getOutput("o1").toString().compareTo("-1") != 0  )
+		$state25 : State ( index == 25 )
+		eval ( $state25.getNoInstances() > 0 )
+		$state27 : State ( index == 27 )
+		$state23 : State ( index == 23 )
+	then
+		log.debug("Firing rule: "+15);
+		((Runner)runner.get(15)).clearAllStates();
+		modify( $state26 )  { decrementNoInstances() };
+		modify( $state25 )  { decrementNoInstances() };
+		$state27.setInput("i3", $state26.getOutput("o3"), 26 );
+		$state27.setNoInstancesToBeCreated( 1 );
+		$state27.setInput("i1", $state26.getOutput("o1"), 26 );
+		$state27.setNoInstancesToBeCreated( 1 );
+		$state27.setInput("i4", $state25.getOutput("o2"), 25 );
+		$state27.setNoInstancesToBeCreated( 1 );
+		$state27.setInput("i5", $state26.getOutput("o4"), 26 );
+		$state27.setNoInstancesToBeCreated( 1 );
+		$state27.setInput("i2", $state26.getOutput("o2"), 26 );
+		$state27.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(15)).addState( $state27 );
+		$state23.setInput("i1", $state25.getOutput("o2"), 25 );
+		$state23.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(15)).addState( $state23 );
+		((Runner)runner.get(15)).executeAll();
+		log.debug("Sent tasks for execution");
+end
+
+rule "16"
+	no-loop false
+	when
+		$state27 : State ( index == 27 )
+		eval ( $state27.getNoInstances() > 0 )
+		$state28 : State ( index == 28 )
+	then
+		log.debug("Firing rule: "+16);
+		((Runner)runner.get(16)).clearAllStates();
+		modify( $state27 )  { decrementNoInstances() };
+		$state28.setInput("i1", $state27.getOutput("o1"), 27 );
+		$state28.setNoInstancesToBeCreated( 1 );
+		$state28.setInput("i2", $state27.getOutput("o2"), 27 );
+		$state28.setNoInstancesToBeCreated( 1 );
+		$state28.setInput("i5", $state27.getOutput("o4"), 27 );
+		$state28.setNoInstancesToBeCreated( 1 );
+		$state28.setInput("i3", $state27.getOutput("o3"), 27 );
+		$state28.setNoInstancesToBeCreated( 1 );
+		$state28.setInput("i4", $state27.getOutput("o5"), 27 );
+		$state28.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(16)).addState( $state28 );
+		((Runner)runner.get(16)).executeAll();
+		log.debug("Sent tasks for execution");
+end
+
+rule "17"
+	no-loop false
+	when
+		$state23 : State ( index == 23 )
+		eval ( $state23.getNoInstances() > 0 )
+		$state28 : State ( index == 28 )
+		eval ( $state28.getNoInstances() > 0 )
+		eval ( $state23.getOutput("o2").toString().compareTo("false") == 0  )
+and		eval ( $state23.getOutput("o1").toString().compareTo("-1") != 0  )
+and		eval ( $state28.getOutput("o4").toString().compareTo($state28.getOutput("o2").toString()) != 0  )
+		$state24 : State ( index == 24 )
+		$state22 : State ( index == 22 )
+		$state33 : State ( index == 33 )
+	then
+		log.debug("Firing rule: "+17);
+		((Runner)runner.get(17)).clearAllStates();
+		modify( $state23 )  { decrementNoInstances() };
+		modify( $state28 )  { decrementNoInstances() };
+		$state24.setInput("i1", $state28.getOutput("o1"), 28 );
+		$state24.setNoInstancesToBeCreated( 1 );
+		$state24.setInput("i2", $state23.getOutput("o1"), 23 );
+		$state24.setNoInstancesToBeCreated( 1 );
+		$state24.setInput("i3", $state28.getOutput("o3"), 28 );
+		$state24.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(17)).addState( $state24 );
+		$state22.setInput("i1", $state23.getOutput("o1"), 23 );
+		$state22.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(17)).addState( $state22 );
+		$state33.setInput("i1", $state28.getOutput("o1"), 28 );
+		$state33.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(17)).addState( $state33 );
+		((Runner)runner.get(17)).executeAll();
+		log.debug("Sent tasks for execution");
+end
+
+rule "18"
+	no-loop false
+	when
+		$state23 : State ( index == 23 )
+		eval ( $state23.getNoInstances() > 0 )
+		$state28 : State ( index == 28 )
+		eval ( $state28.getNoInstances() > 0 )
+		eval ( $state23.getOutput("o2").toString().compareTo("false") == 0  )
+and		eval ( $state23.getOutput("o1").toString().compareTo("-1") != 0  )
+and		eval ( $state28.getOutput("o4").toString().compareTo($state28.getOutput("o2").toString()) == 0  )
+		$state22 : State ( index == 22 )
+		$state33 : State ( index == 33 )
+	then
+		log.debug("Firing rule: "+18);
+		((Runner)runner.get(18)).clearAllStates();
+		modify( $state23 )  { decrementNoInstances() };
+		modify( $state28 )  { decrementNoInstances() };
+		$state22.setInput("i1", $state23.getOutput("o1"), 23 );
+		$state22.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(18)).addState( $state22 );
+		$state33.setInput("i1", $state28.getOutput("o1"), 28 );
+		$state33.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(18)).addState( $state33 );
+		((Runner)runner.get(18)).executeAll();
+		log.debug("Sent tasks for execution");
+end
+
+rule "19"
+	no-loop false
+	when
+		$state23 : State ( index == 23 )
+		eval ( $state23.getNoInstances() > 0 )
+		$state28 : State ( index == 28 )
+		eval ( $state28.getNoInstances() > 0 )
+		eval ( $state23.getOutput("o2").toString().compareTo("true") == 0  )
+and		eval ( $state28.getOutput("o2").toString().compareTo("-1") != 0  )
+and		eval ( $state28.getOutput("o1").toString().compareTo("-1") != 0  )
+		$state18 : State ( index == 18 )
+		$state31 : State ( index == 31 )
+	then
+		log.debug("Firing rule: "+19);
+		((Runner)runner.get(19)).clearAllStates();
+		modify( $state23 )  { decrementNoInstances() };
+		modify( $state28 )  { decrementNoInstances() };
+		$state18.setInput("i1", $state28.getOutput("o6"), 28 );
+		$state18.setNoInstancesToBeCreated( 1 );
+		$state18.setInput("i2", $state28.getOutput("o5"), 28 );
+		$state18.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(19)).addState( $state18 );
+		$state31.setInput("i1", $state28.getOutput("o1"), 28 );
+		$state31.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(19)).addState( $state31 );
+		((Runner)runner.get(19)).executeAll();
+		log.debug("Sent tasks for execution");
+end
+
+rule "20"
+	no-loop false
+	when
+		$state18 : State ( index == 18 )
+		eval ( $state18.getNoInstances() > 0 )
+		$state6 : State ( index == 6 )
+		eval ( $state6.getNoInstances() > 0 )
+		$state29 : State ( index == 29 )
+		eval ( $state29.getNoInstances() > 0 )
+		$state16 : State ( index == 16 )
+	then
+		log.debug("Firing rule: "+20);
+		((Runner)runner.get(20)).clearAllStates();
+		modify( $state18 )  { decrementNoInstances() };
+		modify( $state29 )  { decrementNoInstances() };
+		$state16.setInput("i2", $state29.getOutput("o1"), 29 );
+		$state16.setNoInstancesToBeCreated( 1 );
+		$state16.setInput("i1", $state6.getOutput("o1"), 6 );
+		$state16.setNoInstancesToBeCreated( 1 );
+		$state16.setInput("i3", $state18.getOutput("o1"), 18 );
+		$state16.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(20)).addState( $state16 );
+		((Runner)runner.get(20)).executeAll();
+		log.debug("Sent tasks for execution");
+end
+
+rule "21"
+	no-loop false
+	when
+		$state16 : State ( index == 16 )
+		eval ( $state16.getNoInstances() > 0 )
+		$state6 : State ( index == 6 )
+		eval ( $state6.getNoInstances() > 0 )
+		eval ( $state16.getOutput("o2").toString().compareTo($state6.getOutput("o1").toString()) == 0  )
+		$state20 : State ( index == 20 )
+		$state9 : State ( index == 9 )
+	then
+		log.debug("Firing rule: "+21);
+		((Runner)runner.get(21)).clearAllStates();
+		modify( $state16 )  { decrementNoInstances() };
+		$state20.setInput("i1", $state16.getOutput("o1"), 16 );
+		$state20.setNoInstancesToBeCreated( 1 );
+		$state20.setInput("i2", $state16.getOutput("o3"), 16 );
+		$state20.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(21)).addState( $state20 );
+		$state9.setInput("i1", $state16.getOutput("o1"), 16 );
+		$state9.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(21)).addState( $state9 );
+		((Runner)runner.get(21)).executeAll();
+		log.debug("Sent tasks for execution");
+end
+
+rule "22"
+	no-loop false
+	when
+		$state20 : State ( index == 20 )
+		eval ( $state20.getNoInstances() > 0 )
+		$state9 : State ( index == 9 )
+		eval ( $state9.getNoInstances() > 0 )
+		$state32 : State ( index == 32 )
+	then
+		log.debug("Firing rule: "+22);
+		((Runner)runner.get(22)).clearAllStates();
+		modify( $state9 )  { decrementNoInstances() };
+		$state32.setInput("i1", $state20.getOutput("o2"), 20 );
+		$state32.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(22)).addState( $state32 );
+		((Runner)runner.get(22)).executeAll();
+		log.debug("Sent tasks for execution");
+end
+
+rule "23"
+	no-loop false
+	when
+		$state20 : State ( index == 20 )
+		eval ( $state20.getNoInstances() > 0 )
+		$state32 : State ( index == 32 )
+		eval ( $state32.getNoInstances() > 0 )
+		$state6 : State ( index == 6 )
+		eval ( $state6.getNoInstances() > 0 )
+		$state10 : State ( index == 10 )
+	then
+		log.debug("Firing rule: "+23);
+		((Runner)runner.get(23)).clearAllStates();
+		modify( $state20 )  { decrementNoInstances() };
+		modify( $state32 )  { decrementNoInstances() };
+		$state10.setInput("i1", $state20.getOutput("o1"), 20 );
+		$state10.setNoInstancesToBeCreated( 1 );
+		$state10.setInput("i5", $state6.getOutput("o2"), 6 );
+		$state10.setNoInstancesToBeCreated( 1 );
+		$state10.setInput("i3", $state32.getOutput("o1"), 32 );
+		$state10.setNoInstancesToBeCreated( 1 );
+		$state10.setInput("i2", $state6.getOutput("o1"), 6 );
+		$state10.setNoInstancesToBeCreated( 1 );
+		$state10.setInput("i4", $state20.getOutput("o3"), 20 );
+		$state10.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(23)).addState( $state10 );
+		((Runner)runner.get(23)).executeAll();
+		log.debug("Sent tasks for execution");
+end
+
+rule "24"
+	no-loop false
+	when
+		$state10 : State ( index == 10 )
+		eval ( $state10.getNoInstances() > 0 )
+		eval ( $state10.getOutput("o2").toString().compareTo("false") == 0  )
+		$state6 : State ( index == 6 )
+		eval ( $state6.getNoInstances() > 0 )
+		$state8 : State ( index == 8 )
+	then
+		log.debug("Firing rule: "+24);
+		((Runner)runner.get(24)).clearAllStates();
+		modify( $state10 )  { decrementNoInstances() };
+		$state8.setInput("i1", $state10.getOutput("o1"), 10 );
+		$state8.setNoInstancesToBeCreated( 1 );
+		((Runner)runner.get(24)).addState( $state8 );
+		((Runner)runner.get(24)).executeAll();
+		log.debug("Sent tasks for execution");
+end
+

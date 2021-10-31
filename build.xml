@@ -1,0 +1,78 @@
+<project name="Agent Scheduling Platform" default="dist" basedir=".">
+    <description>
+        Simple build file
+    </description>
+  <!-- set global properties for this build -->
+  <property name="src" location="src"/>
+  <property name="bin" location="bin"/>
+  <property name="dist"  location="dist"/>
+  <property name="lib"  location="lib"/>
+
+  <path id="classpath.path">
+   <pathelement location="${classes}"/>
+   <fileset dir="lib">
+    <include name="*.jar"/>
+   </fileset>
+  </path>
+
+  <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${bin}"/>
+  </target>
+
+  <target name="compile" depends="init"
+        description="compile the source " >  
+    <!-- Compile the java code from ${src} into ${build} -->
+	<javac srcdir="${src}" destdir="${bin}">
+		<classpath><path refid="classpath.path"/></classpath>
+        </javac>
+        <!--<copy file="${src}/settings/logging.properties" todir="${bin}/settings/"/>-->
+        <copy file="${src}/settings/system.properties" todir="${bin}/settings/"/>
+        <copy file="${src}/settings/osyrissystem.properties" todir="${bin}/settings/"/>
+  </target>
+
+  <target name="dist" depends="compile"
+        description="generate the distribution" >
+    <!-- Create the distribution directory -->
+    <mkdir dir="${dist}"/>
+
+    <jar jarfile="${dist}/asf-deps.jar">
+         <zipgroupfileset dir="lib">	 
+             <include name="**/*.jar"/>
+	 </zipgroupfileset>
+    </jar>
+
+    <sleep seconds="1" />
+    <jar jarfile="${dist}/asf-engine_${DSTAMP}.jar" basedir="${bin}">
+        <zipfileset src="${dist}/asf-deps.jar" excludes="META-INF/*.SF" />
+        <manifest>
+            <attribute name="Main-Class" value="utils.install.Deploy" />
+        </manifest>
+    </jar>
+    
+    <delete file="${dist}/asf-deps.jar"/>
+    <copy file="executor.sh" todir="${dist}"/>
+    <copy file="deploy.json" todir="${dist}"/>
+    <copy file="logging.properties" todir="${dist}"/>
+    <copy file="agent.token" todir="${dist}"/>
+    <chmod file="${dist}/executor.sh" perm="777"/>
+    <chmod file="${dist}/agent.token" perm="777"/>
+    <tar destfile="${dist}/asf.tar"
+	basedir="${dist}"
+	excludes="**/deploy.json"
+    />
+    <!--<delete file="${dist}/asf-deps.jar"/>
+    <delete file="${dist}/asf-engine_${DSTAMP}.jar"/>
+    <delete file="${dist}/executor.sh"/>-->
+    <chmod file="${dist}/asf.tar" perm="777"/>    
+  </target>
+  
+  <target name="clean"
+        description="clean up" >
+    <!-- Delete the ${build} and ${dist} directory trees -->
+    <delete dir="${bin}"/>
+    <delete dir="${dist}"/>
+  </target>
+</project>
