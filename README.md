@@ -5,7 +5,7 @@ Project holding the main results of my agent-based scheduling framework combinin
 
 The Agent Scheduling Framework (ASF) provides a decentralized method for scheduling tasks and self-heal. It is based on **Feedback Control Loops** that govern the previous two functionalities. 
 
-It relies on my own **OSyRIS workflow engine** based on a nature inspired paradigm (chemical reactions was the kickstarter) to execute the scheduling algorithms and **RabbitMQ** for handling messages between components. Unfortunately, I cannot find the source code for OSyRIS but I have included the compiled jar file (lib/ folder) together with some example files used by ASF during the scheduling and negotiation (rules/ folder).
+It relies on my own **OSyRIS workflow engine** based on a nature inspired paradigm (chemical reactions was the kickstarter) to execute the scheduling algorithms and **RabbitMQ** for handling messages between components. The source code for OSyRIS can be found in its own repository. Here I have included the compiled jar file (lib/ folder) together with some example files used by ASF during the scheduling and negotiation (rules/ folder).
 
 ### Published papers
 
